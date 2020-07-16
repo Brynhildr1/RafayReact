@@ -28,7 +28,6 @@ class Avatar extends React.Component {
     fetch("https://randomuser.me/api/")
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         this.setState({
           photo: response.results[0].picture.thumbnail,
         });

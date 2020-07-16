@@ -6,6 +6,7 @@ import {
   Animated,
   Easing,
   StatusBar,
+  Button,
 } from "react-native";
 import styled from "styled-components";
 import Card from "../Components/Card";
@@ -15,6 +16,9 @@ import Course from "../Components/Course";
 import Menu from "../Components/Menu";
 import { connect } from "react-redux";
 import Avatar from "../Components/Avatar";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 function mapStateToProps(state) {
   return { action: state.action, name: state.name };
@@ -113,14 +117,20 @@ class Homescreen extends React.Component {
                 showsHorizontalScrollIndicator={false}
               >
                 {cards.map((card, index) => (
-                  <Card
+                  <TouchableOpacity
                     key={index}
-                    title={card.title}
-                    image={card.image}
-                    caption={card.caption}
-                    logo={card.logo}
-                    subtitle={card.subtitle}
-                  />
+                    onPress={() => {
+                      this.props.navigation.push("MyOrigins");
+                    }}
+                  >
+                    <Card
+                      title={card.title}
+                      image={card.image}
+                      caption={card.caption}
+                      logo={card.logo}
+                      subtitle={card.subtitle}
+                    />
+                  </TouchableOpacity>
                 ))}
               </ScrollView>
               <Subtitle>people around me</Subtitle>
@@ -205,6 +215,7 @@ const cards = [
     subtitle: "1 of 8 sections",
     caption: "My Origins",
     logo: require("../assets/rafkhogaming.jpg"),
+    screen: "MyOrigins",
   },
   {
     title: "",
